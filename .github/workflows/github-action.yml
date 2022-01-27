@@ -1,0 +1,10 @@
+name: Github Action
+on:
+  push:
+  pull_request:
+    types: [opened, reopened]
+jobs:
+  Test-GitHub-Actions:
+    runs_on: ubuntu-latest
+	  steps:
+	    - run: echo "Hello"
