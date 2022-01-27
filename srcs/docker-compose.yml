@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+
+  nginx:
+    build:
+      context: ./requirements/nginx
