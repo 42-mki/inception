@@ -24,8 +24,8 @@ make clean
 
 # Step by Step
 
-1. Create 3 default dockerfiles and docker-compose.yml #4
-2. Each Docker image must have the same name as its corresponding service #10
+1. [Create 3 default dockerfiles and docker-compose.yml](https://github.com/newmki/inception/issues/4)
+2. [Each Docker image must have the same name as its corresponding service](https://github.com/newmki/inception/issues/10)
 
 # Keywords
 
