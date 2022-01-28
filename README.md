@@ -22,9 +22,12 @@ make
 make clean
 ```
 
-# Keywords
+# Step by Step
 
-Welcome to the inception wiki!
+1. Create 3 default dockerfiles and docker-compose.yml #4
+2. Each Docker image must have the same name as its corresponding service #10
+
+# Keywords
 
 You can find every infromation about inception.
 
