@@ -4,11 +4,23 @@ services:
   mariadb:
     build:
       context: ./requirements/mariadb
+    container_name: mariadb
+    image: mariadb
+    tty: true
+    stdin_open: true
 
   wordpress:
     build:
       context: ./requirements/wordpress
+    container_name: wordpress
+    image: wordpress
+    tty: true
+    stdin_open: true
 
   nginx:
     build:
       context: ./requirements/nginx
+    container_name: nginx
+    image: nginx 
+    tty: true
+    stdin_open: true
