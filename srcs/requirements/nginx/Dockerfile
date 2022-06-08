@@ -1,3 +1,1 @@
-FROM debian:buster
-
-RUN  apt-get update && apt-get -y upgrade
+FROM alpine:3.13
