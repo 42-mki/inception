@@ -16,17 +16,6 @@ It's about 42cursus inception project. you can follow commits step by step.
 make
 ```
 
-## Clean
-
-```
-make clean
-```
-
-# Step by Step
-
-1. [Create 3 default dockerfiles and docker-compose.yml](https://github.com/newmki/inception/issues/4)
-2. [Each Docker image must have the same name as its corresponding service](https://github.com/newmki/inception/issues/10)
-
 # Keywords
 
 You can find every infromation about inception.
@@ -82,3 +71,19 @@ These are the keywords in the inception subject.
 - static website
 - PHP
 - Adminer
+
+# Step by Step
+
+## 1. Install VirtualBox
+
+## 2. Install Debian and setup
+
+## 3. Install Docker
+
+## 4. Architecture
+
+1. Create folders and Dockerfiles
+2. Write docker-compose.yml
+3. Write Makefile
+
+## 5. Setup MariaDB
