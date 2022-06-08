@@ -1,26 +1,58 @@
-version: "3.9"
-services:
+# Versions
+# Virtual OS: Debian buster 10.11.1
+# Docker version 18.09.1, build 4c52b90 
+# docker-compose version 1.29.2, build 5becea4c
 
+# Local OS: Mac OS X
+# Docker version 20.10.12, build e91ed57
+# docker-compose version 1.29.2, build 5becea4c
+
+# Compose file format 3.7 - Docker engine 18.06.0+
+
+---
+version: "3.7"
+services:
   mariadb:
     build:
       context: ./requirements/mariadb
     container_name: mariadb
     image: mariadb
-    tty: true
-    stdin_open: true
-
+    environment:
+      - HOST_NAME=${HOST_NAME}
+      - HOST_IPV4=${HOST_IPV4}
+      - HOST_IPV6=${HOST_IPV6}
+      - MARIADB_DB=${MARIADB_DB}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PWD=${MARIADB_PWD}
+      - MARIADB_ADMIN_USER=${MARIADB_ADMIN_USER}
+      - MARIADB_ADMIN_PWD=${MARIADB_ADMIN_PWD}
   wordpress:
     build:
       context: ./requirements/wordpress
     container_name: wordpress
     image: wordpress
-    tty: true
-    stdin_open: true
-
   nginx:
     build:
       context: ./requirements/nginx
     container_name: nginx
     image: nginx 
-    tty: true
-    stdin_open: true
+# volume:
+# networks:
+...
+
+# References
+
+# version: docker-compose.yml version
+# services:
+#   service name: It's the name of service
+#     build:
+#       context: Dockerfile location
+#     container_name: container name
+#     image: image name
+#     environment: 
+#       - ENV=${ENV}
+#     networks:
+#     restart:
+#     volumes:
+# volumes:
+# networks: 
