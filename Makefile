@@ -1,5 +1,8 @@
 # This is Makefile for inception project
 NAME			= inception
+SRCS			= ./srcs
+ID			= mki
+DATA_PATH		= /home/$(ID)/data
 
 # docker-compose
 # Options:
@@ -17,7 +20,7 @@ all	: $(NAME)
 #                               --abort-on-container-exit.
 #    --build                    Build images before starting containers.
 $(NAME)	:
-	$(DOCKER-COMPOSE) up --detach --build
+	$(DOCKER-COMPOSE) up -d --build
 
 # docker-compose down
 .PHONY	: clean
@@ -34,7 +37,7 @@ clean	:
 #	sudo docker volume prune --force
 .PHONY	: fclean
 fclean	: clean
-	sudo docker system prune --volumes --all --force
+	docker system prune --volumes --all --force
 
 .PHONY	: re
 re	: fclean all
