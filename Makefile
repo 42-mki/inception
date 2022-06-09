@@ -1,14 +1,12 @@
 # This is Makefile for inception project
 NAME			= inception
-SRCS			= ./srcs
-ID			= mki
-DATA_PATH		= /home/$(ID)/data
+DATA_PATH		= /home/mki/data
 
 # docker-compose
 # Options:
 #  -p, --project-name NAME     Specify an alternate project name
 #                              (default: directory name)
-DOCKER-COMPOSE		= docker-compose --project-directory srcs
+DOCKER-COMPOSE		= docker-compose --project-directory ./srcs
 
 .PHONY	: all
 all	: $(NAME)
@@ -19,7 +17,11 @@ all	: $(NAME)
 #                               print new container names. Incompatible with
 #                               --abort-on-container-exit.
 #    --build                    Build images before starting containers.
+# make directory for volumes
 $(NAME)	:
+	mkdir -p $(DATA_PATH)
+	mkdir -p $(DATA_PATH)/mariadb
+	mkdir -p $(DATA_PATH)/wordpress
 	$(DOCKER-COMPOSE) up -d --build
 
 # docker-compose down
@@ -37,6 +39,9 @@ clean	:
 #	sudo docker volume prune --force
 .PHONY	: fclean
 fclean	: clean
+	rm -rf $(DATA_PATH)
+	docker volume rm srcs_mariadb srcs_wordpress
+	docker volume prune --force
 	docker system prune --volumes --all --force
 
 .PHONY	: re
