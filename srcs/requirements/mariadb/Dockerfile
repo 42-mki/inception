@@ -12,13 +12,14 @@ FROM alpine:3.13
 # mariadb-client is for cli
 # mariadb-client-10.5.16-r0 x86_64 {mariadb} (GPL-2.0-or-later) [installed]
 # https://mariadb.com/docs/connect/clients/mariadb-client/
-RUN apk update && apk add \
+RUN apk update && apk upgrade && apk add \
 	mariadb \
-	mariadb-client
+	mariadb-client \
+	dumb-init
 
 # dumb-init for PID 1 handling signal
 # https://github.com/Yelp/dumb-init
-RUN wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64
+# RUN wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64
 RUN chmod +x /usr/bin/dumb-init
 
 # mariadb-install-db: Init mariadb and create system table

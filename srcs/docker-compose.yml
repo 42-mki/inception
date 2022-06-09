@@ -9,37 +9,6 @@
 
 # Compose file format 3.7 - Docker engine 18.06.0+
 
----
-version: "3.7"
-services:
-  mariadb:
-    build:
-      context: ./requirements/mariadb
-    container_name: mariadb
-    image: mariadb
-    environment:
-      - HOST_NAME=${HOST_NAME}
-      - HOST_IPV4=${HOST_IPV4}
-      - HOST_IPV6=${HOST_IPV6}
-      - MARIADB_DB=${MARIADB_DB}
-      - MARIADB_USER=${MARIADB_USER}
-      - MARIADB_PWD=${MARIADB_PWD}
-      - MARIADB_ADMIN_USER=${MARIADB_ADMIN_USER}
-      - MARIADB_ADMIN_PWD=${MARIADB_ADMIN_PWD}
-  wordpress:
-    build:
-      context: ./requirements/wordpress
-    container_name: wordpress
-    image: wordpress
-  nginx:
-    build:
-      context: ./requirements/nginx
-    container_name: nginx
-    image: nginx 
-# volume:
-# networks:
-...
-
 # References
 
 # version: docker-compose.yml version
@@ -56,3 +25,82 @@ services:
 #     volumes:
 # volumes:
 # networks: 
+---
+version: "3.0"
+
+services:
+
+# 
+# mariadb
+#
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+    container_name: mariadb
+    image: mariadb
+    restart: always
+    volumes:
+      - mariadb:/var
+    networks:
+      - wordpress-mariadb
+    environment:
+      - HOST_NAME=${HOST_NAME}
+      - HOST_IPV4=${HOST_IPV4}
+      - HOST_IPV6=${HOST_IPV6}
+      - MARIADB_DB=${MARIADB_DB}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_ROOT_USER=${MARIADB_ROOT_USER}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+
+#
+# wordpress
+# 
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+    container_name: wordpress
+    image: wordpress
+    restart: always
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - wordpress-mariadb
+      - nginx-wordpress
+    depends_on:
+      - mariadb
+
+#
+# nginx
+#
+  nginx:
+    build:
+      context: ./requirements/nginx
+    container_name: nginx
+    image: nginx 
+    restart: always
+    volumes:
+      - wordpress:/var
+    networks:
+      - nginx-wordpress
+    depends_on:
+      - wordpress
+    ports:
+      - '443:443'
+
+volumes:
+  mariadb:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${VOLUMES_DEVICE}/mariadb
+  wordpress:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${VOLUMES_DEVICE}/wordpress
+
+networks:
+  wordpress-mariadb:
+  nginx-wordpress:
+...
