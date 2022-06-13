@@ -80,7 +80,7 @@ services:
     image: nginx 
     restart: always
     volumes:
-      - wordpress:/var
+      - wordpress:/var/www/wordpress
     networks:
       - nginx-wordpress
     depends_on:
