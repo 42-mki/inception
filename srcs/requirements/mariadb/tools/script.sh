@@ -26,4 +26,3 @@ fi
 
 # Run by Dumb Init
 /usr/bin/mysqld_safe --datadir=/var/lib/mysql
-

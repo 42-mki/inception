@@ -29,7 +29,7 @@ define( 'DB_NAME', getenv('MARIADB_DB') );
 define( 'DB_USER', getenv('MARIADB_USER') );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', getenv('MARIADB_PWD') );
+define( 'DB_PASSWORD', getenv('MARIADB_PASSWORD') );
 
 /** MySQL hostname */
 define( 'DB_HOST', getenv('MARIADB_HOST') );

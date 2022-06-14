@@ -40,8 +40,8 @@ clean	:
 .PHONY	: fclean
 fclean	: clean
 	rm -rf $(DATA_PATH)
-	docker volume rm srcs_mariadb srcs_wordpress
-	docker volume prune --force
+#	docker volume rm srcs_mariadb srcs_wordpress
+#	docker volume prune --force
 	docker system prune --volumes --all --force
 
 .PHONY	: re

@@ -40,13 +40,14 @@ services:
     image: mariadb
     restart: always
     volumes:
-      - mariadb:/var
+      - mariadb:/var/lib/mysql
     networks:
       - wordpress-mariadb
     environment:
       - HOST_NAME=${HOST_NAME}
       - HOST_IPV4=${HOST_IPV4}
       - HOST_IPV6=${HOST_IPV6}
+      - MARIADB_HOST=${MARIADB_HOST}
       - MARIADB_DB=${MARIADB_DB}
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
@@ -69,6 +70,19 @@ services:
       - nginx-wordpress
     depends_on:
       - mariadb
+    environment:
+      - MARIADB_HOST=${MARIADB_HOST}
+      - MARIADB_DB=${MARIADB_DB}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - WORDPRESS_URL=${WORDPRESS_URL}
+      - WORDPRESS_TITLE=${WORDPRESS_TITLE}
+      - WORDPRESS_ADMIN_USER=${WORDPRESS_ADMIN_USER}
+      - WORDPRESS_ADMIN_PASSWORD=${WORDPRESS_ADMIN_PASSWORD}
+      - WORDPRESS_ADMIN_EMAIL=${WORDPRESS_ADMIN_EMAIL}
+      - WORDPRESS_USER=${WORDPRESS_USER}
+      - WORDPRESS_USER_PASSWORD=${WORDPRESS_USER_PASSWORD}
+      - WORDPRESS_USER_EMAIL=${WORDPRESS_USER_EMAIL}
 
 #
 # nginx
