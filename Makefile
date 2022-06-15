@@ -19,6 +19,8 @@ all	: $(NAME)
 #    --build                    Build images before starting containers.
 # make directory for volumes
 $(NAME)	:
+	sed '/mki/d' /etc/hosts
+	echo "127.0.0.1/tmki.42.fr" >> /etc/hosts
 	mkdir -p $(DATA_PATH)
 	mkdir -p $(DATA_PATH)/mariadb
 	mkdir -p $(DATA_PATH)/wordpress
@@ -40,9 +42,6 @@ clean	:
 .PHONY	: fclean
 fclean	: clean
 	rm -rf $(DATA_PATH)
-#	docker volume rm srcs_mariadb srcs_wordpress
-#	docker volume prune --force
-	docker system prune --volumes --all --force
 
 .PHONY	: re
 re	: fclean all
